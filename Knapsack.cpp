@@ -1,4 +1,6 @@
 #include "Knapsack.hpp"
+#include <algorithm>
+#include <iostream>
 
 void Knapsack::calculator() {
     table = std::vector<std::vector<double>>(projects.size() + 1, std::vector<double>(maxBudget+1, 0.0));
@@ -10,6 +12,7 @@ void Knapsack::calculator() {
                 if (projects[i-1].cost > j){
                     table[i][j] = table[i - 1][j];
                 }else{
+                    table[i][j] = std::max(table[i - 1][j], projects[i - 1].gains + table[i - 1][static_cast<int>(j - projects[i - 1].cost)]);
 
                 }
 
@@ -19,4 +22,13 @@ void Knapsack::calculator() {
 
     } //first loop end
 
-} //methos end
+} //method end
+
+
+void Knapsack::showResults(){
+    std::cout << "RESULTS" << std::endl;
+    std::cout << "````````````````````````````````" << std::endl;
+    std::cout<< "Max Gain: " << table[static_cast<int>(projects.size())][static_cast<int>(maxBudget)] << std::endl;
+
+
+}
