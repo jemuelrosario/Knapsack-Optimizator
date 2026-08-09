@@ -9,8 +9,11 @@ class Knapsack {
         std::vector<Project> projects;
         double maxBudget;
         std::vector<std::vector<double>> table;
+        std::vector<Project> chosenProjects;
     public:
         Knapsack(std::vector<Project> projects, double maxBudget) : projects(projects), maxBudget(maxBudget) {}
+
+        void reconstructSolution();
 
         void calculator();
 
